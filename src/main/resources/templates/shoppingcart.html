@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>View 1</title>
+	</head>
+	<body>
+		<!--
+			Feel free to make changes to this HTML but do no change the option in select
+		-->
+
+		<h1>Shopping Cart</h1>
+
+		<form method="POST" action="/shoppingcart" data-th-object="${shoppingcart}">
+			<table>
+				<tr>
+					<td>Item:</td>
+					<td>
+						<select name="item" data-th-object="${shoppingcart}">
+							<option value="apple" name="item" data-th-field="*{item}">Apple</option>
+							<option value="orange" name="item" data-th-field="*{item}">Orange</option>
+							<option value="bread" name="item" data-th-field="*{item}">Bread</option>
+							<option value="cheese" name="item" data-th-field="*{item}">Cheese</option>
+							<option value="chicken" name="item" data-th-field="*{item}">Chicken</option>
+							<option value="mineral_water" name="item" data-th-field="*{item}">Mineral Water</option>
+							<option value="instant_noodles" name="item" data-th-field="*{item}">Instant Noodles</option>
+						</select>
+					</td>
+				</tr>
+				<tr data-th-if="${#fields.hasErrors('item')}">
+					<td>
+						<span data-th-errors="*{item}" data-th-errorclass="error"></span>
+					</td>
+
+				</tr>
+				<tr>
+					<td>Quantity:</td>
+					<td>
+						<input type="number"min="1" name="quantity" data-th-field="*{quantity}" size="4" placeholder="Quantity">
+						<div data-th-if="${#fields.hasErrors('quantity')}">
+							<span data-th-errors="*{quantity}" data-th-errorclass="error"></span>
+						</div>
+					</td>
+				</tr>
+			</table>
+	
+			<table border="1" style="margin-top: 2vh; margin-bottom: 2vh;">
+				<thead>
+					<tr>
+						<th>Item</th>
+						<th>Quantity</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="i:${shoppingCart}">
+						<td>Apple</td>
+						<td>3</td>
+						<data-th-text="${i}">Item</th>
+						<data-th-text="${i}">Quantity</th>
+					</tr>
+				</tbody>
+			</table>
+
+			
+			<ul>
+				<li data-th-each="i: ${shoppingCart}">
+					<span data-th-text="${i}"></span>
+				</li>
+			</ul>
+	
+			<div>
+				<button type="submit">Add</button>
+				<button type="submit" action="/shippingaddress">Next</button>
+			</div>
+		</form>
+		
+		
+	</body>
+</html>
